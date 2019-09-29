@@ -1,0 +1,18 @@
+---
+- name: route53-record
+  hosts: localhost
+  gather_facts: no
+  become: false
+  connection: local
+  tasks:
+    - pip:
+        name: boto
+
+    - route53:
+        state: "{{ record_state }}"
+        zone: "{{ record_zone }}"
+        record: "{{ record_record }}"
+        type: "{{ record_type }}"
+        ttl: "{{ record_ttl }}"
+        value: "{{ record_value }}"
+        wait: no
